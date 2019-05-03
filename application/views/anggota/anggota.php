@@ -8,8 +8,8 @@
 	<h1><center>Data Anggota</center></h1>
 	<div class="d-flex justify-content-center">		
 		<div class="card" style="width: 70rem;">
-			<button class="btn btn-success" onclick="link('anggota_tambah')">Tambah Data</button>
-			<table class="table table-dark">
+			<table class="table table-bordered">
+				<thead class="thead-dark">
 				<tr>
 					<th>Kode Anggota</th>
 					<th>Nama</th>
@@ -17,8 +17,8 @@
 					<th>Jenjang</th>
 					<th>Alamat</th>
 					<th><center>Action</center></th>
-					<th></th>
 				</tr>
+				</thead>
 				<?php foreach($anggota as $value) {?>
 				<tr>
 					<td><?php echo $value->KdAnggota;?></td>
@@ -35,6 +35,7 @@
 				</tr>
 				<?php } ?>
 			</table>
+			<button class="btn btn-success" onclick="link('anggota_tambah')">Tambah Data</button>
 		</div>
 	</div>
 	<script type="text/javascript">

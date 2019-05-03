@@ -35,7 +35,7 @@
   font-family: "Roboto", sans-serif;
   text-transform: uppercase;
   outline: 0;
-  background: #4CAF50;
+  background: #4be252;
   width: 100%;
   border: 0;
   padding: 15px;
@@ -94,11 +94,10 @@
   color: #EF3B3A;
 }
 body {
-  background: #76b852; /* fallback for old browsers */
-  background: -webkit-linear-gradient(right, #76b852, #8DC26F);
-  background: -moz-linear-gradient(right, #76b852, #8DC26F);
-  background: -o-linear-gradient(right, #76b852, #8DC26F);
-  background: linear-gradient(to left, #76b852, #8DC26F);
+  background: -webkit-linear-gradient(right, #60f7f4, #eeffff);
+  background: -moz-linear-gradient(right, #60f7f4, #eeffff);
+  background: -o-linear-gradient(right, #60f7f4, #eeffff);
+  background: linear-gradient(to left, #60f7f4, #eeffff);
   font-family: "Roboto", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;      

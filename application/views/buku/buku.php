@@ -8,8 +8,9 @@
 	<h1><center>Data Buku</center></h1>
 	<div class="d-flex justify-content-center">		
 		<div class="card" style="width: 70rem;">
-			<button class="btn btn-success" onclick="link('buku_tambah')">Tambah Data</button>
-			<table class="table table-dark">
+			
+			<table class="table table-bordered">
+				<thead class="thead-dark">
 				<tr>
 					<th>Kode Buku</th>
 					<th>Judul Buku</th>
@@ -20,8 +21,8 @@
 					<th>Tgl Pinjam</th>
 					<th>Tgl Kembali</th>
 					<th><center>Action</center></th>
-					<th></th>
 				</tr>
+				</thead>
 				<?php foreach($buku as $value) {?>
 				<tr>
 					<td><?php echo $value->KdRegister;?></td>
@@ -46,6 +47,7 @@
 				</tr>
 				<?php } ?>
 			</table>
+			<button class="btn btn-success" onclick="link('buku_tambah')">Tambah Data</button>
 		</div>
 	</div>
 	<script type="text/javascript">

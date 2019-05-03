@@ -36,7 +36,8 @@
 	<h1><center>Data Peminjaman</center></h1>
 	<div class="d-flex justify-content-center">		
 		<div class="card" style="width: 70rem;">
-			<table class="table table-dark">
+			<table class="table table-bordered">
+				<thead class="thead-dark">
 				<tr>
 					<th>Kode Peminjaman</th>
 					<th>Kode Anggota</th>
@@ -45,8 +46,8 @@
 					<th>Tgl Pinjam</th>
 					<th>Tgl Kembali</th>
 					<th><center>Action</center></th>
-					<th></th>
 				</tr>
+				</thead>
 				<?php foreach($sirkulasi as $value) {?>
 				<tr>
 					<td><?php echo $value->Kdpinjam;?></td>
