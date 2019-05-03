@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2019 at 05:20 PM
+-- Generation Time: Apr 27, 2019 at 09:33 PM
 -- Server version: 10.1.35-MariaDB
 -- PHP Version: 7.2.9
 
@@ -66,7 +66,7 @@ CREATE TABLE `buku` (
 --
 
 INSERT INTO `buku` (`KdRegister`, `Judul_Buku`, `Pengarang`, `Penerbit`, `Tahun_Terbit`) VALUES
-(2, 's', 'f', 'e', 2018),
+(2, 's', 'f', 'g', 2018),
 (3, 's', 's', 's', 12),
 (4, 'a', 'a', 'a', 3);
 
@@ -78,9 +78,10 @@ INSERT INTO `buku` (`KdRegister`, `Judul_Buku`, `Pengarang`, `Penerbit`, `Tahun_
 
 CREATE TABLE `detil_pinjam` (
   `Kdregister` int(11) NOT NULL,
-  `Kdpinjem` int(11) NOT NULL,
+  `Kdpinjam` int(11) NOT NULL,
   `Tglpinjam` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `Tglkembali` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00'
+  `Tglkembali` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `id` int(10) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
@@ -108,6 +109,13 @@ CREATE TABLE `petugas` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
+-- Dumping data for table `petugas`
+--
+
+INSERT INTO `petugas` (`KdPetugas`, `Nama`, `Alamat`) VALUES
+(2, 'a', 's');
+
+--
 -- Indexes for dumped tables
 --
 
@@ -122,6 +130,12 @@ ALTER TABLE `anggota`
 --
 ALTER TABLE `buku`
   ADD PRIMARY KEY (`KdRegister`);
+
+--
+-- Indexes for table `detil_pinjam`
+--
+ALTER TABLE `detil_pinjam`
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `peminjaman`
@@ -152,16 +166,10 @@ ALTER TABLE `buku`
   MODIFY `KdRegister` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
--- AUTO_INCREMENT for table `peminjaman`
---
-ALTER TABLE `peminjaman`
-  MODIFY `Kdpinjam` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `petugas`
 --
 ALTER TABLE `petugas`
-  MODIFY `KdPetugas` int(10) NOT NULL AUTO_INCREMENT;
+  MODIFY `KdPetugas` int(10) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

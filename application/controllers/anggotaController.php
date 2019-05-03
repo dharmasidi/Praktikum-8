@@ -25,10 +25,12 @@ class anggotaController extends CI_Controller {
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('anggotaModel');
+		$this->load->model('loginModel');
 	}
 
 	public function index()
 	{
+		$this->loginModel->keamanan();
 		$data['anggota'] = $this->anggotaModel->display();
 		$this->load->view('anggota/anggota',$data);
 	}

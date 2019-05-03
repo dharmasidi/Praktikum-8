@@ -16,6 +16,9 @@
 					<th>Pengarang</th>
 					<th>Penerbit</th>
 					<th>Tahun Terbit</th>
+					<th>Status</th>
+					<th>Tgl Pinjam</th>
+					<th>Tgl Kembali</th>
 					<th><center>Action</center></th>
 					<th></th>
 				</tr>
@@ -26,6 +29,14 @@
 					<td><?php echo $value->Pengarang;?></td>
 					<td><?php echo $value->Penerbit;?></td>
 					<td><?php echo $value->Tahun_Terbit;?></td>
+					<?php if($value->Kdpinjam==''){?>
+						<td>Belum Terpinjam</td>
+					<?php }?>
+					<?php if($value->Kdpinjam!=''){?>
+						<td>Terpinjam</td>
+					<?php }?>
+					<td><?php echo $value->Tglpinjam;?></td>
+					<td><?php echo $value->Tglkembali;?></td>
 					<td>
 						<form method="GET" action=<?php echo base_url()."buku_ubah";?>>
 							<input type="hidden" name="id" value=<?php echo $value->KdRegister;?>>

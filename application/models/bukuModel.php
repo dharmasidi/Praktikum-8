@@ -3,7 +3,8 @@
 	{	
 		function display()
 		{
-			$query=$this->db->query("select * from buku");
+			$query=$this->db->query("SELECT buku.*, detil_pinjam.* FROM buku
+			LEFT JOIN detil_pinjam ON detil_pinjam.Kdregister = buku.KdRegister");
 			return $query->result();		
 		}
 
