@@ -22,19 +22,27 @@ class bukuController extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
+		$this->load->library('pagination');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('bukuModel');
+		$this->load->model('loginModel');
+		$this->loginModel->keamanan();
 	}
 
 	public function index()
 	{
-		$data['buku'] = $this->bukuModel->display();
-		$this->load->view('buku/buku',$data);
-	}
+		$jumlahData = $this->bukuModel->jumlahData();
 
-	public function create(){
-		$this->load->view('buku/tambahBuku');	
+		$config['base_url'] = base_url().'index.php/buku/';
+		$config['total_rows'] = $jumlahData;
+		$config['per_page'] = 5;
+
+		$from = $this->uri->segment(2);
+		$this->pagination->initialize($config);
+
+		$data['buku'] = $this->bukuModel->display($config['per_page'],$from);
+		$this->load->view('buku/buku',$data);
 	}
 
 	public function store(){
@@ -43,8 +51,7 @@ class bukuController extends CI_Controller {
 		$penerbit = $this->input->post('penerbit');
 		$tahun = $this->input->post('tahun');
 		$this->bukuModel->store($judul,$pengarang,$penerbit,$tahun);
-		$data['buku'] = $this->bukuModel->display();
-		$this->load->view('buku/buku',$data);
+		redirect('buku');
 	}
 
 	public function edit(){
@@ -59,7 +66,6 @@ class bukuController extends CI_Controller {
 		$penerbit = $this->input->post('penerbit');
 		$tahun = $this->input->post('tahun');
 		$this->bukuModel->save($judul,$pengarang,$penerbit,$tahun,$id);
-		$data['buku'] = $this->bukuModel->display();
-		$this->load->view('buku/buku',$data);
+		redirect('buku');
 	}
 }

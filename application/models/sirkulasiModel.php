@@ -1,12 +1,13 @@
 <?php  
 	class sirkulasiModel extends CI_Model
 	{	
-		function display()
+		function display($number,$offset)
 		{
-			$query=$this->db->query("
-				SELECT detil_pinjam.*, peminjaman.* FROM peminjaman
-				INNER JOIN detil_pinjam ON detil_pinjam.Kdpinjam = peminjaman.Kdpinjam");
-			return $query->result();		
+			$this->db->select('*');
+			$this->db->from('peminjaman');
+			$this->db->join('detil_pinjam', 'detil_pinjam.Kdpinjam = peminjaman.Kdpinjam', 'inner');
+			$this->db->limit($number,$offset);
+			return $query= $this->db->get()->result();		
 		}
 
 		function pinjam($peminjaman, $anggota, $buku, $petugas, $tanggal){
@@ -27,6 +28,13 @@
 		function hapus($id){
 			$this->db->delete('peminjaman',array("Kdpinjam"=>$id));
 			$this->db->delete('detil_pinjam',array("Kdpinjam"=>$id));
+		}
+
+		function jumlahData(){
+			$this->db->select('*');
+			$this->db->from('peminjaman');
+			$this->db->join('detil_pinjam', 'detil_pinjam.Kdpinjam = peminjaman.Kdpinjam', 'inner');
+			return $this->db->get()->num_rows();
 		}
 	}
 ?>

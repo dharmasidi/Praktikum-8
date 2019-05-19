@@ -22,21 +22,27 @@ class anggotaController extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
+		$this->load->library('pagination');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('anggotaModel');
 		$this->load->model('loginModel');
+		$this->loginModel->keamanan();
 	}
 
 	public function index()
 	{
-		$this->loginModel->keamanan();
-		$data['anggota'] = $this->anggotaModel->display();
-		$this->load->view('anggota/anggota',$data);
-	}
+		$jumlahData = $this->anggotaModel->jumlahData();
 
-	public function create(){
-		$this->load->view('anggota/tambahAnggota');	
+		$config['base_url'] = base_url().'index.php/anggota/';
+		$config['total_rows'] = $jumlahData;
+		$config['per_page'] = 5;
+
+		$from = $this->uri->segment(2);
+		$this->pagination->initialize($config);
+
+		$data['anggota'] = $this->anggotaModel->display($config['per_page'],$from);
+		$this->load->view('anggota/anggota',$data);
 	}
 
 	public function store(){
@@ -45,8 +51,7 @@ class anggotaController extends CI_Controller {
 		$prodi = $this->input->post('prodi');
 		$jenjang = $this->input->post('jenjang');
 		$this->anggotaModel->store($nama,$alamat,$prodi,$jenjang);
-		$data['anggota'] = $this->anggotaModel->display();
-		$this->load->view('anggota/anggota',$data);
+		redirect('anggota');
 	}
 
 	public function edit(){
@@ -61,7 +66,6 @@ class anggotaController extends CI_Controller {
 		$prodi = $this->input->post('prodi');
 		$jenjang = $this->input->post('jenjang');
 		$this->anggotaModel->save($nama,$alamat,$prodi,$jenjang,$id);
-		$data['anggota'] = $this->anggotaModel->display();
-		$this->load->view('anggota/anggota',$data);
+		redirect('anggota');
 	}
 }

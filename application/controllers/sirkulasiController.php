@@ -22,14 +22,26 @@ class sirkulasiController extends CI_Controller {
 	{
 		parent::__construct();
 		$this->load->database();
+		$this->load->library('pagination');
 		$this->load->helper('url');
 		$this->load->helper('form');
 		$this->load->model('sirkulasiModel');
+		$this->load->model('loginModel');
+		$this->loginModel->keamanan();
 	}
 
 	public function index()
 	{
-		$data['sirkulasi'] = $this->sirkulasiModel->display();
+		$jumlahData = $this->sirkulasiModel->jumlahData();
+
+		$config['base_url'] = base_url().'index.php/sirkulasi/';
+		$config['total_rows'] = $jumlahData;
+		$config['per_page'] = 5;
+
+		$from = $this->uri->segment(2);
+		$this->pagination->initialize($config);
+
+		$data['sirkulasi'] = $this->sirkulasiModel->display($config['per_page'],$from);
 		$this->load->view('sirkulasi/pinjam',$data);
 	}
 
@@ -40,14 +52,12 @@ class sirkulasiController extends CI_Controller {
 		$petugas = $this->input->post('petugas');
 		$tanggal = $this->input->post('tanggal');
 		$this->sirkulasiModel->pinjam($peminjaman,$anggota,$buku,$petugas,$tanggal);
-		$data['sirkulasi'] = $this->sirkulasiModel->display();
-		$this->load->view('sirkulasi/pinjam',$data);
+		redirect('sirkulasi');
 	}
 
 	public function hapus(){
-		$id = $this->input->get('id');
+		$id = $this->input->post('id');
 		$this->sirkulasiModel->hapus($id);
-		$data['sirkulasi'] = $this->sirkulasiModel->display();
-		$this->load->view('sirkulasi/pinjam',$data);
+		redirect('sirkulasi');
 	}
 }

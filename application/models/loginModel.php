@@ -11,19 +11,24 @@
 						'username' => $row->username,
 						'password' => $row->password
 					);
-					$this->session->get_userdata($sess);
-					redirect('anggota');
+					$this->session->set_userdata($sess);
+					echo "<script type='text/javascript'>
+					window.alert('Login Sukses');
+					window.location.href='anggota';
+					</script>";
 				}
 			}
 			else{
-				redirect('login');
+				echo "<script type='text/javascript'>
+				window.alert('Pasword atau Username Salah');
+				window.location.href='login';
+				</script>";
 			}
 		}
 
 		public function keamanan(){
-			$username = $this->session->sess_destroy('username');
-			if(!empty($username)){
-				$this->session->sess_destroy();
+			$username = $this->session->userdata('username');
+			if($username==""){
 				redirect('login');
 			}
 		}

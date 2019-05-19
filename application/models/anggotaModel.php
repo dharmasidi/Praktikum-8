@@ -1,10 +1,9 @@
 <?php  
 	class anggotaModel extends CI_Model
 	{	
-		function display()
+		function display($number,$offset)
 		{
-			$query=$this->db->query("select * from anggota");
-			return $query->result();		
+			return $query = $this->db->get("anggota",$number,$offset)->result();		
 		}
 
 		function store($nama,$alamat,$prodi,$jenjang){
@@ -31,6 +30,10 @@
 			);
 			$this->db->where('KdAnggota',$id);
 			$this->db->update("anggota",$data);
+		}
+
+		function jumlahData(){
+			return $this->db->get("anggota")->num_rows();
 		}
 	}
 ?>

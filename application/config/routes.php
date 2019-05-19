@@ -51,15 +51,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 $route['login'] = 'loginController';
 $route['login_ambil'] = 'loginController/cekLogin';
-
 $route['anggota'] = 'anggotaController';
-$route['anggota_tambah'] = 'anggotaController/create';
+$route['anggota/(:any)'] = 'anggotaController';
 $route['anggota_create'] = 'anggotaController/store';
 $route['anggota_ubah'] = 'anggotaController/edit';
 $route['anggota_save'] = 'anggotaController/save';
 
 $route['buku'] = 'bukuController';
-$route['buku_tambah'] = 'bukuController/create';
+$route['buku/(:any)'] = 'bukuController';
 $route['buku_create'] = 'bukuController/store';
 $route['buku_ubah'] = 'bukuController/edit';
 $route['buku_save'] = 'bukuController/save';

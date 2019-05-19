@@ -1,11 +1,13 @@
 <?php  
 	class bukuModel extends CI_Model
 	{	
-		function display()
+		function display($number,$offset)
 		{
-			$query=$this->db->query("SELECT buku.*, detil_pinjam.* FROM buku
-			LEFT JOIN detil_pinjam ON detil_pinjam.Kdregister = buku.KdRegister");
-			return $query->result();		
+			$this->db->select('*');
+			$this->db->from('buku');
+			$this->db->join('detil_pinjam', 'detil_pinjam.Kdregister = buku.KdRegister','left');
+			$this->db->limit($number,$offset);
+			return $query= $this->db->get()->result();		
 		}
 
 		function store($judul,$pengarang,$penerbit,$tahun){
@@ -32,6 +34,13 @@
 			);
 			$this->db->where('KdRegister',$id);
 			$this->db->update("buku",$data);
+		}
+
+		function jumlahData(){
+			$this->db->select('*');
+			$this->db->from('buku');
+			$this->db->join('detil_pinjam', 'detil_pinjam.Kdregister = buku.KdRegister','left');
+			return $this->db->get()->num_rows();
 		}
 	}
 ?>
